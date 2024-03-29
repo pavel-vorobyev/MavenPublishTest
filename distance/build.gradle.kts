@@ -1,6 +1,9 @@
+import java.util.Properties
+
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("maven-publish")
 }
 
 android {
@@ -29,6 +32,34 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = "com.pavelvorobyev"
+            artifactId = "distance"
+            version = "0.0.1"
+            artifact(uri("$buildDir/outputs/aar/distance-release.aar"))
+        }
+    }
+    repositories {
+        maven {
+            val publishPropertiesFiles = project.rootProject.file("publish.properties")
+            val publishProperties = Properties()
+            publishProperties.load(publishPropertiesFiles.inputStream())
+
+            val githubUsername = publishProperties.getProperty("github.username") ?: ""
+            val githubAccessToken = publishProperties.getProperty("github.accessToken") ?: ""
+
+            name = "GithubPackages"
+            url = uri("https://maven.pkg.github.com/pavel-vorobyev/MavenPublishTest/")
+            credentials {
+                username = githubUsername
+                password = githubAccessToken
+            }
+        }
     }
 }
 
