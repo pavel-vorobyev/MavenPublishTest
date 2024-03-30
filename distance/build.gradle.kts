@@ -1,5 +1,3 @@
-import java.util.Properties
-
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
@@ -35,16 +33,16 @@ android {
     }
 }
 
-afterEvaluate {
-    publishing {
-        publications {
-            create<MavenPublication>("release") {
-                groupId = "com.github.pavelvorobyev"
-                artifactId = "distance"
-                version = "0.0.1"
-//                artifact(uri("${layout.buildDirectory}/outputs/aar/distance-release.aar"))
-            }
+publishing {
+    publications {
+        create<MavenPublication>("release") {
+            groupId = "com.github.pavel-vorobyev"
+            artifactId = "distance"
+            version = "0.0.7"
         }
+    }
+    repositories {
+        mavenLocal()
     }
 }
 

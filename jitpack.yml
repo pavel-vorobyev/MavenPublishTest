@@ -1,2 +1,7 @@
 jdk:
   - openjdk17
+before_install:
+  - ./scripts/prepareJitpackEnvironment.sh
+install:
+  - FILE="-Dfile=distance-release.aar"
+  - mvn install:install-file $FILE -DgroupId=com.github.pavel-vorobyev -DartifactId=distance -Dversion=0.0.7 -Dpackaging=aar -DgeneratePom=true
