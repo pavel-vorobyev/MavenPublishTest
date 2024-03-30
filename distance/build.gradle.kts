@@ -35,8 +35,20 @@ android {
     }
 }
 
-dependencies {
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("maven") {
+                groupId = "com.pavelvorobyev"
+                artifactId = "distance"
+                version = "0.0.1"
+                artifact(uri("${layout.buildDirectory}/outputs/aar/distance-release.aar"))
+            }
+        }
+    }
+}
 
+dependencies {
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
