@@ -38,11 +38,11 @@ android {
 afterEvaluate {
     publishing {
         publications {
-            create<MavenPublication>("maven") {
-                groupId = "com.pavelvorobyev"
+            create<MavenPublication>("release") {
+                groupId = "com.github.pavelvorobyev"
                 artifactId = "distance"
                 version = "0.0.1"
-                artifact(uri("${layout.buildDirectory}/outputs/aar/distance-release.aar"))
+//                artifact(uri("${layout.buildDirectory}/outputs/aar/distance-release.aar"))
             }
         }
     }
